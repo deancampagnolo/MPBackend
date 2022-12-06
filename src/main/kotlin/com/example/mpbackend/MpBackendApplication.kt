@@ -2,13 +2,13 @@ package com.example.mpbackend
 
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.web.bind.annotation.*
-import java.io.File
-import java.io.IOException
 
-
+@EnableConfigurationProperties(FileStorageProperties::class)
 @SpringBootApplication
 @RestController
 @RequestMapping("api/v1/customer")
@@ -49,4 +49,9 @@ class MpBackendApplication(val studentRepository: StudentRepository) {
             runApplication<MpBackendApplication>(*args)
         }
     }
+}
+
+@ConfigurationProperties(prefix = "file")
+class FileStorageProperties {
+    var uploadDir: String = "./"
 }
