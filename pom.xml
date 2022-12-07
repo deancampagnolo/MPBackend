@@ -11,8 +11,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>MPBackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo5</name>
-	<description>demo5</description>
+	<name>MPBackend</name>
+	<description>MPBackend</description>
 	<properties>
 		<java.version>17</java.version>
 		<kotlin.version>1.7.21</kotlin.version>
