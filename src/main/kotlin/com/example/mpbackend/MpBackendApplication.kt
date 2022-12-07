@@ -49,7 +49,3 @@ class MpBackendApplication(val studentRepository: StudentRepository) {
         }
     }
 }
-
-class FileStorageProperties {
-    var uploadDir: String = "./"
-}
