@@ -8,7 +8,6 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.web.bind.annotation.*
 
-@EnableConfigurationProperties(FileStorageProperties::class)
 @SpringBootApplication
 @RestController
 @RequestMapping("api/v1/customer")
@@ -51,7 +50,6 @@ class MpBackendApplication(val studentRepository: StudentRepository) {
     }
 }
 
-@ConfigurationProperties(prefix = "file")
 class FileStorageProperties {
     var uploadDir: String = "./"
 }
