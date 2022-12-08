@@ -1,6 +1,6 @@
 package com.example.mpbackend
 
-import jakarta.persistence.*
+import javax.persistence.*
 
 @Entity(name = "Student")
 @Table(name = "student", uniqueConstraints = [UniqueConstraint(name = "student_email_unique", columnNames = arrayOf("email"))])

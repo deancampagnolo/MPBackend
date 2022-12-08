@@ -1,6 +1,13 @@
 server:
-  port: 8080
+  port: 8083
 
+
+logging:
+  level:
+    com:
+      example: TRACE
+    org:
+      zalando: TRACE
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5333/dean
