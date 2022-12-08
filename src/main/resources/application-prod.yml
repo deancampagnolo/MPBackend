@@ -1,9 +1,18 @@
+server:
+  port: 8083
+
+
+logging:
+  level:
+    com:
+      example: TRACE
+    org:
+      zalando: TRACE
 spring:
   datasource:
-    url: jdbc:postgresql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}
-    username: ${PROD_DB_USERNAME}
-    password: ${PROD_DB_PASSWORD}
-
+    url: jdbc:postgresql://localhost:5333/dean
+    username: dean
+    password: password
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -21,6 +30,37 @@ spring:
       max-file-size: 200MB
       max-request-size: 215MB
 
-  #I think this is wrong
-  file:
-    upload-dir: ./
+#I think this is wrong
+file:
+  upload-dir: ./
+
+
+
+
+
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}
+#    username: ${PROD_DB_USERNAME}
+#    password: ${PROD_DB_PASSWORD}
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create-drop
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
+#    show-sql: true
+#  main:
+#    web-application-type: servlet
+#  servlet:
+#    multipart:
+#      enabled: true
+#      file-size-threshold: 2KB
+#      max-file-size: 200MB
+#      max-request-size: 215MB
+#
+#  #I think this is wrong
+#  file:
+#    upload-dir: ./
