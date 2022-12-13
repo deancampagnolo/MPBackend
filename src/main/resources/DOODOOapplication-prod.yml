@@ -1,17 +1,4 @@
-server:
-  port: 8080
-
-logging:
-  level:
-    com:
-      example: TRACE
-    org:
-      zalando: TRACE
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5333/dean
-    username: dean
-    password: password
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -28,8 +15,3 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
-
-#I think this is wrong
-file:
-  upload-dir: ./
-

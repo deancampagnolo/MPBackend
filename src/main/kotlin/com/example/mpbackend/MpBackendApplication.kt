@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 @SpringBootApplication
 @RestController
 @RequestMapping("api/v1/customer")
-class MpBackendApplication(val studentRepository: StudentRepository) {
+class MpBackendApplication(val studentRepository: StudentRepository, val masterpieceRepository: MasterpieceRepository) {
     @GetMapping
     fun getCustomers(): List<Student?> {
         return studentRepository.findAll().toList()
@@ -21,28 +21,18 @@ class MpBackendApplication(val studentRepository: StudentRepository) {
     }
 
     @Bean
-    fun commandLineRunner(studentRepository: StudentRepository): CommandLineRunner? {
+    fun commandLineRunner(studentRepository: StudentRepository, masterpieceRepository: MasterpieceRepository): CommandLineRunner? {
         return CommandLineRunner { args: Array<String?>? ->
             val maria = Student("afdsa", "adfses", "madafsnes@afds.edu", 21)
             studentRepository.save(maria)
+            val bogo = Masterpiece(1,"bogo","peebpoob/dfs")
+            masterpieceRepository.save(bogo)
         }
     }
 
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-//			try {
-//				val myObj = File("./audioFS/filename.txt")
-//				if (myObj.createNewFile()) {
-//					println("File created: " + myObj.name)
-//				} else {
-//					println("File already exists.")
-//				}
-//			} catch (e: IOException) {
-//				println("An error occurred.")
-//				e.printStackTrace()
-//			}
-
             runApplication<MpBackendApplication>(*args)
         }
     }
