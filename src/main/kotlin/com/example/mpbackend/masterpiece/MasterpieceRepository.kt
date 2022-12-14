@@ -1,4 +1,4 @@
-package com.example.mpbackend
+package com.example.mpbackend.masterpiece
 
 import org.springframework.data.jpa.repository.JpaRepository
 

@@ -21,9 +21,12 @@ import java.util.stream.Collectors;
 public class FileController {
 
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+    private final FileStorageService fileStorageService;
 
     @Autowired
-    private FileStorageService fileStorageService;
+    public FileController(FileStorageService fileStorageService) {
+        this.fileStorageService = fileStorageService;
+    }
 
     @GetMapping("/test")
     public String testFun() {

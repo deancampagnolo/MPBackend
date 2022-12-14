@@ -20,7 +20,7 @@ public class FileStorageService {
     private final Path fileStorageLocation;
 
     public FileStorageService() {
-        this.fileStorageLocation = Paths.get("./")
+        this.fileStorageLocation = Paths.get("./audioFS")
                 .toAbsolutePath().normalize();
 
         try {

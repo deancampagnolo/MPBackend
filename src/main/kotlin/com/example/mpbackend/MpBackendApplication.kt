@@ -1,5 +1,7 @@
 package com.example.mpbackend
 
+import com.example.mpbackend.masterpiece.Masterpiece
+import com.example.mpbackend.masterpiece.MasterpieceRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -15,17 +17,25 @@ class MpBackendApplication(val studentRepository: StudentRepository, val masterp
         return studentRepository.findAll().toList()
     }
 
+    @GetMapping("test")
+    fun getTest(): String {
+        return "test"
+    }
+
     @PutMapping("{id}")
     fun putCustomers(@PathVariable id: String): Unit {
         println(id)
     }
 
     @Bean
-    fun commandLineRunner(studentRepository: StudentRepository, masterpieceRepository: MasterpieceRepository): CommandLineRunner? {
+    fun commandLineRunner(
+        studentRepository: StudentRepository,
+        masterpieceRepository: MasterpieceRepository
+    ): CommandLineRunner? {
         return CommandLineRunner { args: Array<String?>? ->
             val maria = Student("afdsa", "adfses", "madafsnes@afds.edu", 21)
             studentRepository.save(maria)
-            val bogo = Masterpiece(1,"bogo","peebpoob/dfs")
+            val bogo = Masterpiece(1, "bogo", "peebpoob/dfs")
             masterpieceRepository.save(bogo)
         }
     }
