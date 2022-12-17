@@ -8,6 +8,8 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.web.bind.annotation.*
 
+
+@CrossOrigin
 @SpringBootApplication
 @RestController
 @RequestMapping("api/v1/customer")
