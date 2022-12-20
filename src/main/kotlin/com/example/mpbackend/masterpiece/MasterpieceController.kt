@@ -1,11 +1,15 @@
 package com.example.mpbackend.masterpiece
 
+import com.example.mpbackend.FileController
 import com.example.mpbackend.FileStorageService
+import org.springframework.core.io.Resource
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import javax.servlet.http.HttpServletRequest
 
 @CrossOrigin
 @RestController
@@ -25,7 +29,7 @@ class MasterpieceController(
     }
 
     @PostMapping("postMasterpiece")
-    fun postMasterpiece(mpContribution: MasterpieceContribution) {
+    fun postMasterpiece(mpContribution: MPBackendContribution) {
 
         masterpieceRepository.save(
             Masterpiece(
@@ -36,11 +40,26 @@ class MasterpieceController(
         )
     }
 
-//    @GetMapping("getMasterpiece")
-//    fun get(): MasterpieceContribution {
-//        val selectedMasterpiece = masterpieceRepository.findById(1).get()
-//        val resource = fileStorageService.loadFileAsResource(selectedMasterpiece.pathToAudio)
-//        return MasterpieceContribution(selectedMasterpiece.songId, selectedMasterpiece.title, )
-//    }
+    @GetMapping("getResource")
+    fun getResource(request: HttpServletRequest): ResponseEntity<Resource> {
+        val resource = fileStorageService.loadFileAsResource("9to5.mp3")
+        return FileController.getResponseEntity(resource, request)
+    }
+
+    @GetMapping("getMasterpieceData")
+    fun getMasterpieceData(): MPClientContribution? {
+        val selectedMasterpiece = masterpieceRepository.findById(1).get()
+
+        return if (selectedMasterpiece.songId != null && selectedMasterpiece.title != null && selectedMasterpiece.pathToAudio != null) {
+//            val resource = fileStorageService.loadFileAsResource(selectedMasterpiece.pathToAudio)
+            MPClientContribution(
+                selectedMasterpiece.songId!!,
+                selectedMasterpiece.title!!,
+                listOf("9to6.mp3", "abc.wav")
+            )
+        } else {
+            null
+        }
+    }
 
 }

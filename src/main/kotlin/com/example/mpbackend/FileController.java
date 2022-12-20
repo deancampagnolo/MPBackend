@@ -1,6 +1,8 @@
 package com.example.mpbackend;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +61,10 @@ public class FileController {
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
         Resource resource = fileStorageService.loadFileAsResource(fileName);
+        return getResponseEntity(resource, request);
+    }
 
+    public static ResponseEntity<Resource> getResponseEntity(@NotNull Resource resource, @NotNull HttpServletRequest request) {
         // Try to determine file's content type
         String contentType = null;
         try {
@@ -72,7 +77,6 @@ public class FileController {
         if (contentType == null) {
             contentType = "application/octet-stream";
         }
-
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")

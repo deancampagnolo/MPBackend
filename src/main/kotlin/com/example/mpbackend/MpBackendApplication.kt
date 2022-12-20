@@ -37,7 +37,7 @@ class MpBackendApplication(val studentRepository: StudentRepository, val masterp
         return CommandLineRunner { args: Array<String?>? ->
             val maria = Student("afdsa", "adfses", "madafsnes@afds.edu", 21)
             studentRepository.save(maria)
-            val bogo = Masterpiece(1, "bogo", "peebpoob/dfs")
+            val bogo = Masterpiece(1, "bogo", "9to5.mp3")
             masterpieceRepository.save(bogo)
         }
     }
