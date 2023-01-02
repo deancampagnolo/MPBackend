@@ -1,4 +1,4 @@
-package com.example.mpbackend;
+package com.example.mpbackend.localstorage;
 
 public class UploadFileResponse {
     private String fileName;

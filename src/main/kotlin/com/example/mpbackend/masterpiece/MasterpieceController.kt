@@ -1,7 +1,7 @@
 package com.example.mpbackend.masterpiece
 
-import com.example.mpbackend.FileController
-import com.example.mpbackend.FileStorageService
+import com.example.mpbackend.localstorage.FileController
+import com.example.mpbackend.localstorage.FileStorageService
 import org.springframework.core.io.Resource
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -35,7 +35,8 @@ class MasterpieceController(
             Masterpiece(
                 mpContribution.songId,
                 mpContribution.title,
-                fileStorageService.storeFile(mpContribution.file)
+                mpContribution.fileName
+//                fileStorageService.storeFile(mpContribution.file)
             )
         )
     }

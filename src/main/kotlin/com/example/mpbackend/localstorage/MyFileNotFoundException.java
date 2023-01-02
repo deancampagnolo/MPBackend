@@ -1,4 +1,4 @@
-package com.example.mpbackend;
+package com.example.mpbackend.localstorage;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -12,13 +12,8 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin
 @SpringBootApplication
 @RestController
-@RequestMapping("api/v1/customer")
-class MpBackendApplication(val studentRepository: StudentRepository, val masterpieceRepository: MasterpieceRepository) {
-    @GetMapping
-    fun getCustomers(): List<Student?> {
-        return studentRepository.findAll().toList()
-    }
-
+@RequestMapping("api/v1/default")
+class MpBackendApplication(val masterpieceRepository: MasterpieceRepository) {
     @GetMapping("test")
     fun getTest(): String {
         return "test"
@@ -31,12 +26,9 @@ class MpBackendApplication(val studentRepository: StudentRepository, val masterp
 
     @Bean
     fun commandLineRunner(
-        studentRepository: StudentRepository,
         masterpieceRepository: MasterpieceRepository
     ): CommandLineRunner? {
         return CommandLineRunner { args: Array<String?>? ->
-            val maria = Student("afdsa", "adfses", "madafsnes@afds.edu", 21)
-            studentRepository.save(maria)
             val bogo = Masterpiece(1, "bogo", "9to5.mp3")
             masterpieceRepository.save(bogo)
         }
