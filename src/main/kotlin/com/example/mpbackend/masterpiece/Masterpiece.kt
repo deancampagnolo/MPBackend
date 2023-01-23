@@ -17,13 +17,13 @@ class Masterpiece {
     @Column(name = "title", nullable = false, columnDefinition = "TEXT")
     var title: String? = null
 
-    @Column(name = "path_to_audio", nullable = false, columnDefinition = "TEXT")
-    var pathToAudio: String? = null
+    @Column(name = "paths_to_audio", nullable = false, columnDefinition = "TEXT")
+    var pathsToAudio: String? = null
 
-    constructor(songId: Long?, title: String?, pathToAudio: String?) {
+    constructor(songId: Long?, title: String?, pathsToAudio: String?) {
         this.songId = songId
         this.title = title
-        this.pathToAudio = pathToAudio
+        this.pathsToAudio = pathsToAudio
     }
 
     constructor()
@@ -33,7 +33,7 @@ class Masterpiece {
                 "userId=" + userId +
                 ", songId='" + songId + '\'' +
                 ", title='" + title + '\'' +
-                ", pathToAudio='" + pathToAudio + '\'' +
+                ", pathsToAudio='" + pathsToAudio + '\'' +
                 '}'
     }
 }

@@ -4,11 +4,7 @@ import com.example.mpbackend.localstorage.FileController
 import com.example.mpbackend.localstorage.FileStorageService
 import org.springframework.core.io.Resource
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
 
 @CrossOrigin
@@ -35,7 +31,7 @@ class MasterpieceController(
             Masterpiece(
                 mpContribution.songId,
                 mpContribution.title,
-                mpContribution.fileName
+                mpContribution.fileNames.joinToString { it }
 //                fileStorageService.storeFile(mpContribution.file)
             )
         )
@@ -47,20 +43,33 @@ class MasterpieceController(
         return FileController.getResponseEntity(resource, request)
     }
 
-    @GetMapping("getMasterpieceData")
-    fun getMasterpieceData(): MPClientContribution? {
-        val selectedMasterpiece = masterpieceRepository.findById(1).get()
+    @GetMapping("getMasterpieceData/{id}")
+    fun getMasterpieceData(@PathVariable id: Long): MPClientContribution? {
+        val selectedMasterpiece = masterpieceRepository.findById(id).get()
 
-        return if (selectedMasterpiece.songId != null && selectedMasterpiece.title != null && selectedMasterpiece.pathToAudio != null) {
-//            val resource = fileStorageService.loadFileAsResource(selectedMasterpiece.pathToAudio)
+        return if (selectedMasterpiece.songId != null && selectedMasterpiece.title != null && selectedMasterpiece.pathsToAudio != null) {
             MPClientContribution(
                 selectedMasterpiece.songId!!,
                 selectedMasterpiece.title!!,
-                listOf("9to6.mp3", "abc.wav")
+                selectedMasterpiece.pathsToAudio!!.split(",")
             )
         } else {
             null
         }
     }
 
+    @GetMapping("getRandomMasterpieceData")
+    fun getRandomMasterpieceData(): MPClientContribution? {
+        val selectedMasterpiece = masterpieceRepository.findById(1).get()
+
+        return if (selectedMasterpiece.songId != null && selectedMasterpiece.title != null && selectedMasterpiece.pathsToAudio != null) {
+            MPClientContribution(
+                selectedMasterpiece.songId!!,
+                selectedMasterpiece.title!!,
+                selectedMasterpiece.pathsToAudio!!.split(",")
+            )
+        } else {
+            null
+        }
+    }
 }
