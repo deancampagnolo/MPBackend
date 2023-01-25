@@ -17,8 +17,8 @@ class S3FilesController {
         return "test"
     }
 
-    @GetMapping("urlGet")
-    fun findByName(@RequestParam("fileNames") fileNames: List<String>): ResponseEntity<List<String>> {
+    @GetMapping("urlGet/{fileNames}")
+    fun findByName(@PathVariable("fileNames") fileNames: List<String>): ResponseEntity<List<String>> {
         val urlGetList: MutableList<String> = mutableListOf()
 
         s3FilesService?.let { s3 ->

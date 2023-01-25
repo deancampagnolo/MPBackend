@@ -25,16 +25,15 @@ class MasterpieceController(
     }
 
     @PostMapping("postMasterpiece")
-    fun postMasterpiece(mpContribution: MPBackendContribution) {
+    fun postMasterpiece(mpContribution: MPBackendContribution): Long? {
 
-        masterpieceRepository.save(
+        return masterpieceRepository.save(
             Masterpiece(
                 mpContribution.songId,
                 mpContribution.title,
                 mpContribution.fileNames.joinToString { it }
-//                fileStorageService.storeFile(mpContribution.file)
             )
-        )
+        ).userId
     }
 
     @GetMapping("getResource")
@@ -51,7 +50,7 @@ class MasterpieceController(
             MPClientContribution(
                 selectedMasterpiece.songId!!,
                 selectedMasterpiece.title!!,
-                selectedMasterpiece.pathsToAudio!!.split(",")
+                selectedMasterpiece.pathsToAudio!!.split(", ")
             )
         } else {
             null
@@ -66,7 +65,7 @@ class MasterpieceController(
             MPClientContribution(
                 selectedMasterpiece.songId!!,
                 selectedMasterpiece.title!!,
-                selectedMasterpiece.pathsToAudio!!.split(",")
+                selectedMasterpiece.pathsToAudio!!.split(", ")
             )
         } else {
             null

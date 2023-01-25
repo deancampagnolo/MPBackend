@@ -2,6 +2,8 @@ package com.example.mpbackend.s3
 
 import com.amazonaws.HttpMethod
 import com.amazonaws.services.s3.AmazonS3
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest
+import com.amazonaws.services.s3.model.ResponseHeaderOverrides
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -18,10 +20,17 @@ class S3FilesService {
 
     private val s3BucketName: String? = null
     private fun generateUrl(fileName: String, httpMethod: HttpMethod): String {
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        calendar.add(Calendar.DATE, 1) // Generated URL will be valid for 24 hours
-        return amazonS3!!.generatePresignedUrl(s3BucketName, fileName, calendar.time, httpMethod).toString()
+        val generatePresignedUrlRequest = GeneratePresignedUrlRequest(s3BucketName, fileName, httpMethod)
+        val responseHeaders = ResponseHeaderOverrides() // I do not understand why this has to be a response header
+        // rather than setting the content type on generatePresignedUrlRequest directly... if the latter, then I get a 403 error from client
+        // saying 'The request signature we calculated does not match the signature you provided. Check your key and signing method.'
+        // I did notice when I put it into postman that with the latter method it generates a put url where the response content type
+        // is not audio related. idk why its response content type instead of content type if I am directly uploading the file though
+        // and not getting it through a response
+        responseHeaders.contentType = "audio/mpeg"
+        generatePresignedUrlRequest.responseHeaders = responseHeaders;
+
+        return amazonS3!!.generatePresignedUrl(generatePresignedUrlRequest).toString()
     }
 
     @Async
