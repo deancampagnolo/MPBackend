@@ -29,6 +29,7 @@ class S3FilesService {
         // and not getting it through a response
         responseHeaders.contentType = "audio/mpeg"
         generatePresignedUrlRequest.responseHeaders = responseHeaders;
+        // generatePresignedUrlRequest.contentType = "audio/mpeg" // TODO this should eventually be implemented, right now there is a bug in frontend erroring when this is used, def fixable - just a bit lazy
 
         return amazonS3!!.generatePresignedUrl(generatePresignedUrlRequest).toString()
     }

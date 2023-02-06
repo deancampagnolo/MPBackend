@@ -29,7 +29,7 @@ class MpBackendApplication(val masterpieceRepository: MasterpieceRepository) {
         masterpieceRepository: MasterpieceRepository
     ): CommandLineRunner? {
         return CommandLineRunner { args: Array<String?>? ->
-            val bogo = Masterpiece(1, "bogo", "JerryToes.mp3")
+            val bogo = Masterpiece(1, "bogo", "JerryToes.mp3", "Jerrys Toes")
             masterpieceRepository.save(bogo)
         }
     }

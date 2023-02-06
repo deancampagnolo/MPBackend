@@ -20,10 +20,14 @@ class Masterpiece {
     @Column(name = "paths_to_audio", nullable = false, columnDefinition = "TEXT")
     var pathsToAudio: String? = null
 
-    constructor(songId: Long?, title: String?, pathsToAudio: String?) {
+    @Column(name = "snippet_titles", nullable = false, columnDefinition = "TEXT")
+    var snippetTitles: String? = null
+
+    constructor(songId: Long?, title: String?, pathsToAudio: String?, snippetTitles: String?) {
         this.songId = songId
         this.title = title
         this.pathsToAudio = pathsToAudio
+        this.snippetTitles = snippetTitles
     }
 
     constructor()
@@ -34,6 +38,7 @@ class Masterpiece {
                 ", songId='" + songId + '\'' +
                 ", title='" + title + '\'' +
                 ", pathsToAudio='" + pathsToAudio + '\'' +
+                ", snippetTitles='" + snippetTitles + '\'' +
                 '}'
     }
 }
