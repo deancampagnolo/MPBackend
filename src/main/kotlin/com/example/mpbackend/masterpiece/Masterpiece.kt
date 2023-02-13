@@ -17,17 +17,37 @@ class Masterpiece {
     @Column(name = "title", nullable = false, columnDefinition = "TEXT")
     var title: String? = null
 
+    @Column(name = "neededInstruments", nullable = false, columnDefinition = "TEXT")
+    var neededInstruments: String? = null
+
+    @Column(name = "bpm", nullable = false)
+    var bpm: Int? = null
+
+    @Column(name = "key", nullable = false, columnDefinition = "TEXT")
+    var key: String? = null
+
     @Column(name = "paths_to_audio", nullable = false, columnDefinition = "TEXT")
     var pathsToAudio: String? = null
 
     @Column(name = "snippet_titles", nullable = false, columnDefinition = "TEXT")
     var snippetTitles: String? = null
 
-    constructor(songId: Long?, title: String?, pathsToAudio: String?, snippetTitles: String?) {
+    constructor(
+        songId: Long?,
+        title: String?,
+        pathsToAudio: String?,
+        snippetTitles: String?,
+        neededInstruments: String?,
+        bpm: Int?,
+        key: String?
+    ) {
         this.songId = songId
         this.title = title
         this.pathsToAudio = pathsToAudio
         this.snippetTitles = snippetTitles
+        this.neededInstruments = neededInstruments
+        this.bpm = bpm
+        this.key = key
     }
 
     constructor()
@@ -39,6 +59,9 @@ class Masterpiece {
                 ", title='" + title + '\'' +
                 ", pathsToAudio='" + pathsToAudio + '\'' +
                 ", snippetTitles='" + snippetTitles + '\'' +
+                ", neededInstruments='" + neededInstruments + '\'' +
+                ", bpm='" + bpm + '\'' +
+                ", key='" + key + '\'' +
                 '}'
     }
 }
