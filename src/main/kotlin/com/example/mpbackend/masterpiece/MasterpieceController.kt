@@ -34,10 +34,12 @@ class MasterpieceController(
         println(mpContribution)
         val srcFiles: MutableList<String> = mutableListOf()
         val snippetTitles: MutableList<String> = mutableListOf()
+        val volumes: MutableList<String> = mutableListOf()
         val data = mpContribution.dataContribution
         mpContribution.snippetContributions.forEach {
             srcFiles.add(it.src)
             snippetTitles.add(it.snippetTitle)
+            volumes.add(it.volume.toString())
         }
         return masterpieceRepository.save(
             Masterpiece(
@@ -48,6 +50,7 @@ class MasterpieceController(
                 data.neededInstruments.joinToString { it },
                 data.bpm,
                 data.key,
+                volumes.joinToString { it },
             )
         ).userId
     }
@@ -65,9 +68,10 @@ class MasterpieceController(
         val snippetContributions: MutableList<MPSnippetContribution> = mutableListOf()
         val pathsToAudio = selectedMasterpiece.pathsToAudio!!.split(", ")
         val snippetTitles = selectedMasterpiece.snippetTitles!!.split(", ")
+        val volumes = selectedMasterpiece.volumes!!.split(", ").map { it.toFloat() }
         val neededInstruments = selectedMasterpiece.neededInstruments!!.split(", ")
         pathsToAudio.forEachIndexed { index, _ ->
-            snippetContributions.add(MPSnippetContribution(pathsToAudio[index], snippetTitles[index]))
+            snippetContributions.add(MPSnippetContribution(pathsToAudio[index], snippetTitles[index], volumes[index]))
         }
 
         return if (selectedMasterpiece.songId != null && selectedMasterpiece.title != null && selectedMasterpiece.pathsToAudio != null) {

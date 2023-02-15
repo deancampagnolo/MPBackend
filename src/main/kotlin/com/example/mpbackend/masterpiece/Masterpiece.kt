@@ -32,6 +32,9 @@ class Masterpiece {
     @Column(name = "snippet_titles", nullable = false, columnDefinition = "TEXT")
     var snippetTitles: String? = null
 
+    @Column(name = "volumes", nullable = false, columnDefinition = "TEXT")
+    var volumes: String? = null
+
     constructor(
         songId: Long?,
         title: String?,
@@ -39,7 +42,8 @@ class Masterpiece {
         snippetTitles: String?,
         neededInstruments: String?,
         bpm: Int?,
-        key: String?
+        key: String?,
+        volumes: String?,
     ) {
         this.songId = songId
         this.title = title
@@ -48,6 +52,7 @@ class Masterpiece {
         this.neededInstruments = neededInstruments
         this.bpm = bpm
         this.key = key
+        this.volumes = volumes
     }
 
     constructor()
@@ -62,6 +67,7 @@ class Masterpiece {
                 ", neededInstruments='" + neededInstruments + '\'' +
                 ", bpm='" + bpm + '\'' +
                 ", key='" + key + '\'' +
+                ", volumes='" + volumes + '\'' +
                 '}'
     }
 }
