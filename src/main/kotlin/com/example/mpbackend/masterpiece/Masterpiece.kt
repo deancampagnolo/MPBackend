@@ -35,6 +35,9 @@ class Masterpiece {
     @Column(name = "volumes", nullable = false, columnDefinition = "TEXT")
     var volumes: String? = null
 
+    @Column(name = "nudgeObjects", nullable = false, columnDefinition = "TEXT")
+    var nudgeObjects: String? = null
+
     constructor(
         songId: Long?,
         title: String?,
@@ -44,6 +47,7 @@ class Masterpiece {
         bpm: Int?,
         key: String?,
         volumes: String?,
+        nudgeObjects: String?,
     ) {
         this.songId = songId
         this.title = title
@@ -53,6 +57,7 @@ class Masterpiece {
         this.bpm = bpm
         this.key = key
         this.volumes = volumes
+        this.nudgeObjects = nudgeObjects
     }
 
     constructor()
@@ -68,6 +73,7 @@ class Masterpiece {
                 ", bpm='" + bpm + '\'' +
                 ", key='" + key + '\'' +
                 ", volumes='" + volumes + '\'' +
+                ", nudgeObjects='" + nudgeObjects + '\'' +
                 '}'
     }
 }
