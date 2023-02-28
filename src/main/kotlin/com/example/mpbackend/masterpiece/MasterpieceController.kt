@@ -52,6 +52,7 @@ class MasterpieceController(
                 data.neededInstruments.joinToString { it },
                 data.bpm,
                 data.key,
+                data.previewSrc,
                 volumes.joinToString { it },
                 nudgeObjects.joinToString(separator = "^ ") { it }
             )
@@ -86,6 +87,7 @@ class MasterpieceController(
                     neededInstruments,
                     selectedMasterpiece.bpm!!,
                     selectedMasterpiece.key!!,
+                    selectedMasterpiece.previewUrl!!,
                 ),
                 snippetContributions,
             )

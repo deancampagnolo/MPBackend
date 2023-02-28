@@ -26,6 +26,9 @@ class Masterpiece {
     @Column(name = "key", nullable = false, columnDefinition = "TEXT")
     var key: String? = null
 
+    @Column(name = "previewUrl", nullable = false, columnDefinition = "TEXT")
+    var previewUrl: String? = null
+
     @Column(name = "paths_to_audio", nullable = false, columnDefinition = "TEXT")
     var pathsToAudio: String? = null
 
@@ -46,6 +49,7 @@ class Masterpiece {
         neededInstruments: String?,
         bpm: Int?,
         key: String?,
+        previewUrl: String?,
         volumes: String?,
         nudgeObjects: String?,
     ) {
@@ -56,6 +60,7 @@ class Masterpiece {
         this.neededInstruments = neededInstruments
         this.bpm = bpm
         this.key = key
+        this.previewUrl = previewUrl
         this.volumes = volumes
         this.nudgeObjects = nudgeObjects
     }
@@ -72,6 +77,7 @@ class Masterpiece {
                 ", neededInstruments='" + neededInstruments + '\'' +
                 ", bpm='" + bpm + '\'' +
                 ", key='" + key + '\'' +
+                ", previewUrl='" + previewUrl + '\'' +
                 ", volumes='" + volumes + '\'' +
                 ", nudgeObjects='" + nudgeObjects + '\'' +
                 '}'

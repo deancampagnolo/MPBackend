@@ -27,7 +27,7 @@ class S3FilesService {
         // I did notice when I put it into postman that with the latter method it generates a put url where the response content type
         // is not audio related. idk why its response content type instead of content type if I am directly uploading the file though
         // and not getting it through a response
-        responseHeaders.contentType = "audio/mpeg"
+        responseHeaders.contentType = "audio/mpeg" // FIXME Not coding the ogg files correctly
         generatePresignedUrlRequest.responseHeaders = responseHeaders;
         // generatePresignedUrlRequest.contentType = "audio/mpeg" // TODO this should eventually be implemented, right now there is a bug in frontend erroring when this is used, def fixable - just a bit lazy
 
