@@ -112,9 +112,8 @@ class MasterpieceController(
 //        return masterpieceRepository.findTopByOrderByUserIdDesc()?.userId
     }
 
-    @GetMapping("getRandomMasterpieceData")
-    fun getRandomMasterpieceData(): MPBackendContribution? {
-        val id = (1..masterpieceRepository.count()).random()
-        return getMasterpieceData(id)
+    @GetMapping("getRandomMasterpieceId")
+    fun getRandomMasterpieceData(): Long {
+        return (1..masterpieceRepository.count()).random()
     }
 }
