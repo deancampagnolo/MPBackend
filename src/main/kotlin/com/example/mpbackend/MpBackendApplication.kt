@@ -30,10 +30,20 @@ class MpBackendApplication(val masterpieceRepository: MasterpieceRepository) {
     ): CommandLineRunner? {
         return CommandLineRunner { args: Array<String?>? ->
             val bogo = Masterpiece(
-                1, "bogo", "JerryToes.mp3", "Jerrys Toes", "guitar, banjo",
-                103, "F#", "aRealHoot.mp3", "-25", "{\"16n\": 1}"
+                45, "My Piano Track", "MPPianoTrack.mp3, mpDrumTrack.mp3", "Piano, Drums", "guitar, banjo",
+                103, "F#", "aRealHoot.mp3", "-25, -10", "{\"16n\": 1}^ {\"16n\": 5}"
+            )
+            val bogo2 = Masterpiece(
+                77, "bogo2", "aRealHoot.mp3", "aRealHoot", "guitar, banjo",
+                103, "A#", "aRealHoot.mp3", "-25", "{\"16n\": 1}"
+            )
+            val bogo3 = Masterpiece(
+                34, "bogo3", "aRealHoot.mp3", "aRealHoot", "guitar, banjo",
+                103, "B#", "aRealHoot.mp3", "-25", "{\"16n\": 1}"
             )
             masterpieceRepository.save(bogo)
+            masterpieceRepository.save(bogo2)
+            masterpieceRepository.save(bogo3)
         }
     }
 

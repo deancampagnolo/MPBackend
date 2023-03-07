@@ -3,12 +3,14 @@ package com.example.mpbackend.masterpiece
 import com.example.mpbackend.localstorage.FileController
 import com.example.mpbackend.localstorage.FileStorageService
 import org.springframework.core.io.Resource
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
 
 @CrossOrigin
 @RestController
+@EnableJpaRepositories
 @RequestMapping("api/v1/masterpiece")
 class MasterpieceController(
     val masterpieceRepository: MasterpieceRepository,
@@ -76,7 +78,14 @@ class MasterpieceController(
         val neededInstruments = selectedMasterpiece.neededInstruments!!.split(", ")
         val nudgeObjects = selectedMasterpiece.nudgeObjects!!.split("^ ")
         pathsToAudio.forEachIndexed { index, _ ->
-            snippetContributions.add(MPSnippetContribution(pathsToAudio[index], snippetTitles[index], volumes[index], nudgeObjects[index]))
+            snippetContributions.add(
+                MPSnippetContribution(
+                    pathsToAudio[index],
+                    snippetTitles[index],
+                    volumes[index],
+                    nudgeObjects[index]
+                )
+            )
         }
 
         return if (selectedMasterpiece.songId != null && selectedMasterpiece.title != null && selectedMasterpiece.pathsToAudio != null) {
@@ -96,18 +105,16 @@ class MasterpieceController(
         }
     }
 
-//    @GetMapping("getRandomMasterpieceData")
-//    fun getRandomMasterpieceData(): MPClientContribution? {
-//        val selectedMasterpiece = masterpieceRepository.findById(1).get()
-//
-//        return if (selectedMasterpiece.songId != null && selectedMasterpiece.title != null && selectedMasterpiece.pathsToAudio != null) {
-//            MPClientContribution(
-//                selectedMasterpiece.songId!!,
-//                selectedMasterpiece.title!!,
-//                selectedMasterpiece.pathsToAudio!!.split(", ")
-//            )
-//        } else {
-//            null
-//        }
-//    }
+    @GetMapping("getTitle")
+    fun getTitle(): Long? {
+        return masterpieceRepository.findByTitle("bogo").first()?.songId
+
+//        return masterpieceRepository.findTopByOrderByUserIdDesc()?.userId
+    }
+
+    @GetMapping("getRandomMasterpieceData")
+    fun getRandomMasterpieceData(): MPBackendContribution? {
+        val id = (1..masterpieceRepository.count()).random()
+        return getMasterpieceData(id)
+    }
 }

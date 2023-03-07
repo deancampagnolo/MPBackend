@@ -8,11 +8,11 @@ class Masterpiece {
     @Id
     @SequenceGenerator(name = "masterpiece_sequence", sequenceName = "masterpiece_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "masterpiece_sequence")
-    @Column(name = "user_id", updatable = false)
-    var userId: Long? = null
-
     @Column(name = "song_id", updatable = false)
     var songId: Long? = null
+
+    @Column(name = "user_id", updatable = false)
+    var userId: Long? = null
 
     @Column(name = "title", nullable = false, columnDefinition = "TEXT")
     var title: String? = null
@@ -42,7 +42,7 @@ class Masterpiece {
     var nudgeObjects: String? = null
 
     constructor(
-        songId: Long?,
+        userId: Long?,
         title: String?,
         pathsToAudio: String?,
         snippetTitles: String?,
@@ -53,7 +53,7 @@ class Masterpiece {
         volumes: String?,
         nudgeObjects: String?,
     ) {
-        this.songId = songId
+        this.userId = userId
         this.title = title
         this.pathsToAudio = pathsToAudio
         this.snippetTitles = snippetTitles
@@ -69,8 +69,8 @@ class Masterpiece {
 
     override fun toString(): String {
         return "Masterpiece{" +
-                "userId=" + userId +
-                ", songId='" + songId + '\'' +
+                "songId=" + songId +
+                ", userId='" + userId + '\'' +
                 ", title='" + title + '\'' +
                 ", pathsToAudio='" + pathsToAudio + '\'' +
                 ", snippetTitles='" + snippetTitles + '\'' +
