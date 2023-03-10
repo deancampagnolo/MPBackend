@@ -31,7 +31,7 @@ class MasterpieceController(
     fun postMPTest(@RequestBody mpContribution: MPSnippetContribution): Unit {
     }
 
-    private fun getUser(id: Long): UserDetails {
+    private fun getUser(id: String): UserDetails {
         var user = userDetailsRepository.findById(id).orElse(null)
         if (user == null) {
             user = userDetailsRepository.save(UserDetails(id))
@@ -70,7 +70,7 @@ class MasterpieceController(
         )
         newMasterpiece.userContributions.add(user)
 
-        return masterpieceRepository.save(newMasterpiece).userId
+        return masterpieceRepository.save(newMasterpiece).songId
     }
 
     @GetMapping("getResource")
@@ -100,10 +100,10 @@ class MasterpieceController(
             )
         }
 
-        return if (selectedMasterpiece.songId != null && selectedMasterpiece.title != null && selectedMasterpiece.pathsToAudio != null) {
+        return if (selectedMasterpiece.title != null && selectedMasterpiece.pathsToAudio != null) {
             MPBackendContribution(
                 MPDataContribution(
-                    selectedMasterpiece.songId!!,
+                    selectedMasterpiece.userId!!,
                     selectedMasterpiece.title!!,
                     neededInstruments,
                     selectedMasterpiece.bpm!!,

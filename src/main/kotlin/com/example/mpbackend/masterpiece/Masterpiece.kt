@@ -12,7 +12,7 @@ class Masterpiece {
     var songId: Long? = null
 
     @Column(name = "user_id", updatable = false)
-    var userId: Long? = null
+    var userId: String? = null
 
     @Column(name = "date_created", updatable = false)
     var dateCreated: Long? = null
@@ -54,7 +54,7 @@ class Masterpiece {
 
 
     constructor(
-        userId: Long?,
+        userId: String?,
         dateCreated: Long?,
         title: String?,
         pathsToAudio: String?,

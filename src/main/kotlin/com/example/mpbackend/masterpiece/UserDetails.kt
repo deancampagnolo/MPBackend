@@ -7,14 +7,14 @@ import javax.persistence.*
 public class UserDetails {
     @Id
     @Column(name = "user_id")
-    var userId: Long? = null
+    var userId: String? = null
     // other user fields
 
     @JsonIgnore
     @ManyToMany(mappedBy = "userContributions") // we will probably need this for most of our use cases
     var masterpieces: MutableSet<Masterpiece> = mutableSetOf()
 
-    constructor(id: Long) {
+    constructor(id: String) {
         this.userId = id
     }
 

@@ -34,8 +34,8 @@ class MpBackendApplication(
         masterpieceRepository: MasterpieceRepository, userDetailsRepository: UserDetailsRepository
     ): CommandLineRunner? {
         return CommandLineRunner { args: Array<String?>? ->
-            val bob = UserDetails(12)
-            val george = UserDetails(14)
+            val bob = UserDetails("12")
+            val george = UserDetails("14")
             val bogo = Masterpiece(
                 bob.userId,
                 System.currentTimeMillis(),
@@ -66,7 +66,7 @@ class MpBackendApplication(
             masterpieceRepository.save(bogo2)
             masterpieceRepository.save(bogo3)
             val mp = masterpieceRepository.findById(1).get()
-            val ud = userDetailsRepository.findById(12).get()
+            val ud = userDetailsRepository.findById("12").get()
             mp.userContributions.add(ud)
             mp.userContributions.add(george)
             masterpieceRepository.save(mp)
