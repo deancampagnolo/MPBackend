@@ -14,6 +14,9 @@ class Masterpiece {
     @Column(name = "user_id", updatable = false)
     var userId: Long? = null
 
+    @Column(name = "date_created", updatable = false)
+    var dateCreated: Long? = null
+
     @Column(name = "title", nullable = false, columnDefinition = "TEXT")
     var title: String? = null
 
@@ -41,8 +44,18 @@ class Masterpiece {
     @Column(name = "nudgeObjects", nullable = false, columnDefinition = "TEXT")
     var nudgeObjects: String? = null
 
+    @ManyToMany(fetch = FetchType.EAGER) // We will probably need this for most of our use cases
+    @JoinTable(
+        name = "user_contributions",
+        joinColumns = [JoinColumn(name = "masterpiece_id")],
+        inverseJoinColumns = [JoinColumn(name = "user_id")]
+    )
+    var userContributions: MutableSet<UserDetails> = mutableSetOf()
+
+
     constructor(
         userId: Long?,
+        dateCreated: Long?,
         title: String?,
         pathsToAudio: String?,
         snippetTitles: String?,
@@ -54,6 +67,7 @@ class Masterpiece {
         nudgeObjects: String?,
     ) {
         this.userId = userId
+        this.dateCreated = dateCreated
         this.title = title
         this.pathsToAudio = pathsToAudio
         this.snippetTitles = snippetTitles
@@ -71,6 +85,7 @@ class Masterpiece {
         return "Masterpiece{" +
                 "songId=" + songId +
                 ", userId='" + userId + '\'' +
+                ", dateCreated='" + dateCreated + '\'' +
                 ", title='" + title + '\'' +
                 ", pathsToAudio='" + pathsToAudio + '\'' +
                 ", snippetTitles='" + snippetTitles + '\'' +

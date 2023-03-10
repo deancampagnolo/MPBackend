@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest
 @RequestMapping("api/v1/masterpiece")
 class MasterpieceController(
     val masterpieceRepository: MasterpieceRepository,
+    val userDetailsRepository: UserDetailsRepository,
     val fileStorageService: FileStorageService
 ) {
     @GetMapping("test")
@@ -28,7 +29,14 @@ class MasterpieceController(
 
     @PostMapping("postMPTest")
     fun postMPTest(@RequestBody mpContribution: MPSnippetContribution): Unit {
-        println(mpContribution)
+    }
+
+    private fun getUser(id: Long): UserDetails {
+        var user = userDetailsRepository.findById(id).orElse(null)
+        if (user == null) {
+            user = userDetailsRepository.save(UserDetails(id))
+        }
+        return user
     }
 
     @PostMapping("postMasterpiece")
@@ -39,26 +47,30 @@ class MasterpieceController(
         val volumes: MutableList<String> = mutableListOf()
         val nudgeObjects: MutableList<String> = mutableListOf()
         val data = mpContribution.dataContribution
+        val user = getUser(data.userId)
         mpContribution.snippetContributions.forEach {
             srcFiles.add(it.src)
             snippetTitles.add(it.snippetTitle)
             volumes.add(it.volume.toString())
             nudgeObjects.add(it.nudgeAmountObject)
         }
-        return masterpieceRepository.save(
-            Masterpiece(
-                data.songId,
-                data.title,
-                srcFiles.joinToString { it },
-                snippetTitles.joinToString { it },
-                data.neededInstruments.joinToString { it },
-                data.bpm,
-                data.key,
-                data.previewSrc,
-                volumes.joinToString { it },
-                nudgeObjects.joinToString(separator = "^ ") { it }
-            )
-        ).userId
+
+        val newMasterpiece = Masterpiece(
+            user.userId,
+            System.currentTimeMillis(),
+            data.title,
+            srcFiles.joinToString { it },
+            snippetTitles.joinToString { it },
+            data.neededInstruments.joinToString { it },
+            data.bpm,
+            data.key,
+            data.previewSrc,
+            volumes.joinToString { it },
+            nudgeObjects.joinToString(separator = "^ ") { it }
+        )
+        newMasterpiece.userContributions.add(user)
+
+        return masterpieceRepository.save(newMasterpiece).userId
     }
 
     @GetMapping("getResource")

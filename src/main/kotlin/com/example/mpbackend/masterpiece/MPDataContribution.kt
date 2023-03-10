@@ -1,7 +1,7 @@
 package com.example.mpbackend.masterpiece
 
 data class MPDataContribution(
-    val songId: Long,
+    val userId: Long,
     val title: String,
     val neededInstruments: List<String>,
     val bpm: Int,
