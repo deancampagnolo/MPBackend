@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.web.bind.annotation.*
 
 
-@CrossOrigin
+@CrossOriginPreset
 @SpringBootApplication
 @RestController
 @RequestMapping("api/v1/default")

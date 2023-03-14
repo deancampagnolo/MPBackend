@@ -1,21 +1,16 @@
 package com.example.mpbackend.masterpiece
 
-import com.example.mpbackend.localstorage.FileController
-import com.example.mpbackend.localstorage.FileStorageService
-import org.springframework.core.io.Resource
+import com.example.mpbackend.CrossOriginPreset
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import javax.servlet.http.HttpServletRequest
 
-@CrossOrigin
+@CrossOriginPreset
 @RestController
 @EnableJpaRepositories
 @RequestMapping("api/v1/masterpiece")
 class MasterpieceController(
     val masterpieceRepository: MasterpieceRepository,
-    val userDetailsRepository: UserDetailsRepository,
-    val fileStorageService: FileStorageService
+    val userDetailsRepository: UserDetailsRepository
 ) {
     @GetMapping("test")
     fun testFun(): String {
@@ -71,12 +66,6 @@ class MasterpieceController(
         newMasterpiece.userContributions.add(user)
 
         return masterpieceRepository.save(newMasterpiece).songId
-    }
-
-    @GetMapping("getResource")
-    fun getResource(request: HttpServletRequest): ResponseEntity<Resource> {
-        val resource = fileStorageService.loadFileAsResource("9to5.mp3")
-        return FileController.getResponseEntity(resource, request)
     }
 
     @GetMapping("getMasterpieceData/{id}")

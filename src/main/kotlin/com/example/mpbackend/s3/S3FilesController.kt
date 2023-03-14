@@ -1,12 +1,13 @@
 package com.example.mpbackend.s3
 
+import com.example.mpbackend.CrossOriginPreset
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@CrossOrigin
+@CrossOriginPreset
 @RequestMapping("api/v1/s3Files")
 class S3FilesController {
     @Autowired
