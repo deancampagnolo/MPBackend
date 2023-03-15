@@ -3,6 +3,7 @@ package com.example.mpbackend.masterpiece
 import com.example.mpbackend.CrossOriginPreset
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.web.bind.annotation.*
+import kotlin.properties.Delegates
 
 @CrossOriginPreset
 @RestController
@@ -113,8 +114,28 @@ class MasterpieceController(
 //        return masterpieceRepository.findTopByOrderByUserIdDesc()?.userId
     }
 
-    @GetMapping("getRandomMasterpieceId")
-    fun getRandomMasterpieceData(): Long {
+    private fun generateRandomIndex(): Long {
         return (1..masterpieceRepository.count()).random()
+    }
+
+    @RequestMapping(
+        value = ["getRandomMasterpieceId/", "getRandomMasterpieceId/{userId}"],
+        method = [RequestMethod.GET]
+    )
+    fun getRandomMasterpieceId(@PathVariable(required = false) userId: String?): Long {
+        if (userId == null) {
+            return generateRandomIndex()
+        }
+        val user = getUser(userId)
+        var index by Delegates.notNull<Long>()
+        for (i in 1..10) {
+            index = generateRandomIndex()
+            if (!user.visitedMasterpieces.contains(index)) {
+                break
+            }
+        }
+        user.visitedMasterpieces.add(index)
+        userDetailsRepository.save(user)
+        return index
     }
 }

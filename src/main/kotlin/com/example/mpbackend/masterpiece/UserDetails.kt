@@ -14,6 +14,9 @@ public class UserDetails {
     @ManyToMany(mappedBy = "userContributions") // we will probably need this for most of our use cases
     var masterpieces: MutableSet<Masterpiece> = mutableSetOf()
 
+    @ElementCollection
+    val visitedMasterpieces: MutableSet<Long> = mutableSetOf()
+
     constructor(id: String) {
         this.userId = id
     }

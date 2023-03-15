@@ -69,7 +69,10 @@ class MpBackendApplication(
             val ud = userDetailsRepository.findById("12").get()
             mp.userContributions.add(ud)
             mp.userContributions.add(george)
+            mp.songId?.let { george.visitedMasterpieces.add(it) }
+            george.visitedMasterpieces.add(2)
             masterpieceRepository.save(mp)
+            userDetailsRepository.save(george)
         }
     }
 
