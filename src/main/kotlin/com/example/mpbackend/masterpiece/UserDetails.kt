@@ -12,7 +12,7 @@ public class UserDetails {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "userContributions") // we will probably need this for most of our use cases
-    var masterpieces: MutableSet<Masterpiece> = mutableSetOf()
+    var masterpieces: MutableList<Masterpiece> = mutableListOf()
 
     @ElementCollection
     val visitedMasterpieces: MutableSet<Long> = mutableSetOf()

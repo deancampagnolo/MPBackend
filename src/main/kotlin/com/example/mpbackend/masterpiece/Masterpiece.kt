@@ -50,7 +50,7 @@ class Masterpiece {
         joinColumns = [JoinColumn(name = "masterpiece_id")],
         inverseJoinColumns = [JoinColumn(name = "user_id")]
     )
-    var userContributions: MutableSet<UserDetails> = mutableSetOf()
+    var userContributions: MutableList<UserDetails> = mutableListOf()
 
 
     constructor(

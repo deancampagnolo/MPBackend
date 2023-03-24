@@ -107,11 +107,9 @@ class MasterpieceController(
         }
     }
 
-    @GetMapping("getTitle")
-    fun getTitle(): Long? {
-        return masterpieceRepository.findByTitle("bogo").first()?.songId
-
-//        return masterpieceRepository.findTopByOrderByUserIdDesc()?.userId
+    @GetMapping("getMasterpieceTitle/{id}")
+    fun getMasterpieceTitle(@PathVariable id: Long): String? {
+        return masterpieceRepository.findById(id).get().title
     }
 
     private fun generateRandomIndex(): Long {
@@ -137,5 +135,15 @@ class MasterpieceController(
         user.visitedMasterpieces.add(index)
         userDetailsRepository.save(user)
         return index
+    }
+
+    // FIXME Double check if its getting the 10 most recent
+    @GetMapping("getAllMasterpieceHistory/{userId}/{page}/{amount}")
+    fun getAllMasterpieceHistory(
+        @PathVariable userId: String,
+        @PathVariable page: Int,
+        @PathVariable amount: Int
+    ): List<Long> {
+        return getUser(userId).masterpieces.drop(page * amount).take(amount).mapNotNull { it.songId }
     }
 }

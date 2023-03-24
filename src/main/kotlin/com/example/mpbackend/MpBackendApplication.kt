@@ -51,13 +51,22 @@ class MpBackendApplication(
             )
             //bogo.userContributions.add(bob)
             val bogo2 = Masterpiece(
-                bob.userId, System.currentTimeMillis(), "bogo2", "aRealHoot.mp3", "aRealHoot", "guitar, banjo",
+                bob.userId, System.currentTimeMillis(), "bogo2", "aRealHoot.mp3", "aRealHoot", "xylophone",
                 103, "A#", "aRealHoot.mp3", "-25", "{\"16n\": 1}"
             )
             //bogo2.userContributions.add(bob)
             val bogo3 = Masterpiece(
-                george.userId, System.currentTimeMillis(), "bogo3", "aRealHoot.mp3", "aRealHoot", "guitar, banjo",
-                103, "B#", "aRealHoot.mp3", "-25", "{\"16n\": 1}"
+                george.userId,
+                System.currentTimeMillis(),
+                "bogo3",
+                "aRealHoot.mp3",
+                "aRealHoot",
+                "singer, banjo, shaker",
+                107,
+                "B#",
+                "aRealHoot.mp3",
+                "-25",
+                "{\"16n\": 1}"
             )
             //bogo2.userContributions.add(george)
             userDetailsRepository.save(bob)
